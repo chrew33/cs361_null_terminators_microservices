@@ -37,7 +37,7 @@ Here is an example where we want the image URL of puppy123:
 
 We recommend that you actually do:
 `const imageName = "puppy123";`
-`const response = await fetch(`http://localhost:5001/api/image?q=${endcodedURIComponent(imageName)}`);`
+`const response = await fetch('http://localhost:5001/api/image?q=${endcodedURIComponent(imageName)}');`
 This is because if the name of the image has special characters such as spaces, it will cause an error.
 So, please use `encodedURIComponent()`.
 
