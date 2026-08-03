@@ -13,7 +13,24 @@ In order to request data from the microservice, the developer needs to send a HT
 
 
 ## Example REQUEST in JavaScript using fetch()
-For this example, we will assume that you are running this microservice in the same computer as the program that will be requesting the image URL. For this example, we will use `fetch()`.
+For this example, we will assume that you are running this microservice in the same computer as the program that will be requesting the image URL. 
+
+First, we need to do a POST request to the microservice to save an image name and website url pair. 
+
+```
+const postResponse = await fetch(`http://localhost:5001/api/image`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                query_name: "puppy123",
+                website_url: "https://example.com/puppy123.jpg"
+            })
+        });
+```
+
+With that you just sent the image name `puppy123` and the website URL attached to it `https://example.com/puppy123.jpg`. So now when you do a GET request with the query parameter `puppy123`, the microservice should return that website URL.
 
 Here is an example where we want the image URL of puppy123:
 `const response = await fetch('http://localhost:5001/api/image?q=puppy123');`
@@ -22,21 +39,30 @@ We recommend that you actually do:
 `const imageName = "puppy123";`
 `const response = await fetch(`http://localhost:5001/api/image?q=${endcodedURIComponent(imageName)}`);`
 This is because if the name of the image has special characters such as spaces, it will cause an error.
-So please use `encodedURIComponent()`.
+So, please use `encodedURIComponent()`.
 
 # How to RECEIVE data from the microservice using json()
 At this step, we assume you made the same call as the example shown above. 
 
-If successful we should expect a status code of 200. The variable `response` should have the response from the microservice. In order to extract the JSON from the response, we will use `json()`.
+If successful we should expect a status code of 200. The variable `response` should have the response from the microservice.
 
 Here is an example where we want to get the JSON data from the response:
 `const jsonData = await response.json();`
 
 We expect the variable `jsonData` to hold the following data:
-`{status: "success", query: "puppy123",  image_url: "https://via.placeholder.com/300x400.png?text=puppy123", source: "Image Service API"}` 
+`{status: "success", query: "puppy123",  image_url: "https://example.com/puppy123.jpg", source: "Image Service API"}` 
 
-If the request was not successful due to missing query parameter, you should expect a status code of 400 from the response and a data of:
+If the request was not successful due to missing query parameter, you should expect a status code of 404 from the response and a data of:
 `{status: "error", message: "Missing required query parameter 'q'"}`
+
+If you try to do a GET request of an image name that the microservice does not have it will return a generic place holder URL for `image_url`. For example, GET request of `cat123`:
+```
+        {
+            status: "resource not found",
+            query: "cat123",
+            image_url: `https://via.placeholder.com/300x400.png?text=cat123`,
+        }
+```
 
 # UML Sequence Diagram
 ![UML Sequence Diagram](docs/UML_sequence_diagram.png)
