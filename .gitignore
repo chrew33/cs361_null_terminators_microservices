@@ -1,15 +1,8 @@
 # Dependencies
-2
 node_modules/
-3
- 
-4
+
 # Local database files
-5
 *.db
-6
- 
-7
+
 # Environment variables
-8
 .env
