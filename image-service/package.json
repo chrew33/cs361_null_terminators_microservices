@@ -1,0 +1,13 @@
+{
+  "name": "image-return-microservice",
+  "version": "1.0.0",
+  "description": "Image Return Microservice using Node.js and Express",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.22.2",
+    "sqlite3": "^6.0.1"
+  }
+}
