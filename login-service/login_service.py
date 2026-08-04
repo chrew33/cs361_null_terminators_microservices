@@ -14,9 +14,7 @@ with app.app_context():
 @app.route('/login', methods=['POST'])
 def login_check():
     
-    data = request.get_json()
-    username = data.get('username')
-    password = data.get('password')
+    username, password = _get_and_parse_data()
     
     user = User.query.filter_by(username=username).first()
     
@@ -28,10 +26,8 @@ def login_check():
     
 @app.route('/register', methods=['POST'])
 def register():
-    
-    data = request.get_json()
-    new_username = data.get('username')
-    new_password = data.get('password')
+
+    new_username, new_password = _get_and_parse_data()
     
     # this could be where an authentication microservice call could be made.
     
@@ -47,7 +43,15 @@ def register():
     print("new user created")
     return jsonify({"signup_success": True}), 201
     
+def _get_and_parse_data() -> tuple[str,str]:
+    """
+    Reads JSON from requests and returns username and password.
+    """
+    data = request.get_json()
+    username = data.get('username')
+    password = data.get('password')
 
+    return username, password
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
