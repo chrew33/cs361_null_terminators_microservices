@@ -37,6 +37,18 @@ app.post("/api/math", (req, res) => {
             result = divfunc(values);
             break;
 
+        case "avg":
+            result = avgfunc(values);
+            break;
+
+        case "min":
+            result = minfunc(values);
+            break;
+
+        case "max":
+            result = maxfunc(values);
+            break;
+
         // if none of the switch cases worked, it was an unsupported operator
         default:
             return res.status(400).json(
@@ -121,6 +133,33 @@ function divfunc(values){
     return result;
 }
 
+function avgfunc(values){
+    let sum = 0;
+    for (let i=0; i < values.length; i++){
+        sum += values[i]
+    }
+    return sum / values.length;
+}
+
+function minfunc(values){
+    let min = values[0]
+    for (let i=1; i < values.length; i++){
+        if (values[i] < min){
+            min = values[i]
+        }
+    }
+    return min;
+}
+
+function maxfunc(values){
+    let max = values[1];
+    for (let i=1; i < values.length; i++){
+        if (values[i] > max){
+            max = values[i]
+        }
+    }
+    return max;
+}
 
 // Start listening on port 5050
 app.listen(PORT, () => {
