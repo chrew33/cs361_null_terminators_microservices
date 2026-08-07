@@ -6,3 +6,7 @@ node_modules/
 
 # Environment variables
 .env
+venv
+
+# Cache files
+__pycache__
