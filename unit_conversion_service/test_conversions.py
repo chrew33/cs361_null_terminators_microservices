@@ -3,7 +3,7 @@ import time
 
 first_json_data = {
     "unit": "kg",
-    "value": 200.0
+    "value": 100.0
 }
 
 response = requests.get('http://127.0.0.1:5000/weight',
@@ -24,6 +24,36 @@ print(response.json())
 if f"{float(response.json().get('result')):.3f}" != \
         f"{first_json_data['value']:.3f}":
     print('Error: Conversion failed. KG->LB->KG did not return the original '
+          'value within 3 decimal places. Original: '
+         f'{first_json_data["value"]}. Converted: '
+         f'{float(response.json().get('result')):.3f}')
+
+
+
+
+first_temperature_json_data = {
+    "unit": "f",
+    "value": 212
+}
+
+response = requests.get('http://127.0.0.1:5000/temperature',
+                        json=first_temperature_json_data)
+response.raise_for_status()
+print(response.json())
+
+second_temperature_json_data = {
+    "unit": "c",
+    "value": response.json().get('result')
+}
+
+response = requests.get('http://127.0.0.1:5000/temperature',
+                        json=second_temperature_json_data)
+response.raise_for_status()
+print(response.json())
+
+if f"{float(response.json().get('result')):.3f}" != \
+        f"{first_json_data['value']:.3f}":
+    print('Error: Conversion failed. F->C->F did not return the original '
           'value within 3 decimal places. Original: '
          f'{first_json_data["value"]}. Converted: '
          f'{float(response.json().get('result')):.3f}')
