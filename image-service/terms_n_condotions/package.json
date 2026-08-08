@@ -1,0 +1,12 @@
+{
+  "name": "terms-and-conditions-service",
+  "version": "1.0.0",
+  "description": "Terms and conditions microservice",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
