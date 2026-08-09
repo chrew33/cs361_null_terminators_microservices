@@ -30,3 +30,24 @@ We do the following to obtain the json data:
 ```
 const resultData = await response.json();
 ```
+
+
+# Example Responses
+*Success Response (Status 200):*
+
+```json
+{
+    "valid": true,
+    "message": "Username and password meet all conditions. User is elligible for signup!"
+}
+
+
+
+*Failure Response (Status 400):
+{
+    "valid": false,
+    "messages": [
+        "Username must be at least 5 characters long.",
+        "Password must contain at least one special character"
+    ]
+}
