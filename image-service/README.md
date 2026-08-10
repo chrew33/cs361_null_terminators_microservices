@@ -60,7 +60,7 @@ If you try to do a GET request of an image name that the microservice does not h
         {
             status: "resource not found",
             query: "cat123",
-            image_url: `https://via.placeholder.com/300x400.png?text=cat123`,
+            image_url: `https://loremflickr.com/300/400/cat123`,
         }
 ```
 
