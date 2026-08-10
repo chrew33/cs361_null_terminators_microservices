@@ -1,6 +1,8 @@
 import requests
 import time
 
+# WEIGHT TESTING
+
 first_json_data = {
     "unit": "kg",
     "value": 100.0
@@ -29,7 +31,7 @@ if f"{float(response.json().get('result')):.3f}" != \
          f'{float(response.json().get('result')):.3f}')
 
 
-
+# TEMPERATURE TESTING
 
 first_temperature_json_data = {
     "unit": "f",
@@ -57,3 +59,26 @@ if f"{float(response.json().get('result')):.3f}" != \
           'value within 3 decimal places. Original: '
          f'{first_json_data["value"]}. Converted: '
          f'{float(response.json().get('result')):.3f}')
+
+
+## PRECIP TESTING
+
+first_precip_data = {
+    "unit": "mm",
+    "value": 100
+}
+
+response = requests.get('http://127.0.0.1:5000/precipitation',
+                        json=first_precip_data)
+response.raise_for_status()
+print(f"THIS IS PRECIP TEST 1{response.json()}")
+
+second_precip_data = {
+    "unit": "in",
+    "value": 30
+}
+
+response = requests.get('http://127.0.0.1:5000/precipitation',
+                        json=second_precip_data)
+response.raise_for_status()
+print(f"THIS IS PRECIP TEST 2{response.json()}")

@@ -35,6 +35,22 @@ def convert_temp():
         result = value * 1.8 + 32
 
     return jsonify({"result": float(result)}), 200
+
+@app.route('/precipitation', methods=['GET'])
+def convert_precip():
+    """
+    Converts millimeters -> inches -> millimeters
+    """
+    unit, value = _get_and_parse_data()
+
+    if unit != 'mm' and unit != 'in':
+        return jsonify({"result": "Invalid unit for precipitation conversion"}), 400
+    elif unit == 'mm':
+        result = value / 25.4
+    elif unit == 'in':
+        result = value * 25.4
+
+    return jsonify({"result": float(result)}), 200
     
 
 def _get_and_parse_data() -> tuple[str,str]:
