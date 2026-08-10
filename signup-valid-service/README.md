@@ -16,7 +16,7 @@ const dataToSend = {
     password: "mypassword123!"
 }
 
-response = await fetch("http://localhost:6060/validate", {
+const response = await fetch("http://localhost:6060/validate", {
     method: "Post",
     headers:{
         "Content-Type": "application/json"
