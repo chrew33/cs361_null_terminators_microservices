@@ -62,7 +62,7 @@ app.get("/api/image", (req, res) => {
         const responseData = {
             status: "resource not found",
             query: query,
-            image_url: `https://via.placeholder.com/300x400.png?text=${formattedQuery}`,
+            image_url: `https://loremflickr.com/300/400/${formattedQuery}`,
           };
         return res.status(404).json(responseData);
       }
