@@ -6,6 +6,10 @@ const PORT = process.env.PORT || 6070;
 
 app.use(express.json());
 
+// Test route
+app.get("/test", (req, res) => {
+  res.json({ message: "Test route works!" });
+});
 // Path for storing local favorites data persistently
 const STORAGE_FILE = path.join(__dirname, "favorites.json");
 
@@ -102,6 +106,44 @@ app.post("/favorites", (req, res) => {
 app.get("/favorites", (req, res) => {
   const favorites = readFavorites();
   res.json({ success: true, favorites });
+});
+
+// 4. Weather Lookup Endpoint (Powered by Open-Meteo API)
+app.get("/lookup/weather", async (req, res) => {
+  const { lat, lon } = req.query;
+
+  if (!lat || !lon) {
+    return res.status(400).json({
+      success: false,
+      message: "Please provide both 'lat' and 'lon' query parameters.",
+    });
+  }
+
+  try {
+    const response = await fetch(
+      `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`,
+    );
+
+    if (!response.ok) {
+      return res.status(404).json({
+        success: false,
+        message: "Weather data couldn't be fetched for those coordinates.",
+      });
+    }
+
+    const weatherData = await response.json();
+
+    res.json({
+      success: true,
+      location: { latitude: lat, longitude: lon },
+      current_weather: weatherData.current_weather,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: "Server error occurred while fetching weather data.",
+    });
+  }
 });
 
 app.listen(PORT, () => {
