@@ -112,7 +112,6 @@ export async function getWeatherForecast(searchLocation) {
     const geoData = await getCoordinates(searchLocation);
     const forecast = await getForecast(geoData.latitude, geoData.longitude);
 
-    //console.log(forecast);
     return forecast
 
 }
@@ -121,9 +120,6 @@ app.get('/forecast', async (req,res) => {
     const location = req.query.location;
     const result = await getWeatherForecast(location);
 
-    // const current = result.current;
-    // const hourly = result.hourly;
-    // const daily = result.daily;
 
     const forecast = {
         current_units: result.current_units,
