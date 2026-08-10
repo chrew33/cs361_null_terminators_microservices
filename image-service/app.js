@@ -1,6 +1,12 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
+
+app.use(cors());
 const PORT = 5001;
+
+
+
 
 // create the database that will hold name of image and website
 const sqlite3 = require("sqlite3").verbose();

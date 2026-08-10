@@ -1,9 +1,11 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS  # <--- 1. Import CORS
 from models import db, Quote
 from sqlalchemy import func
 import requests
 
 app = Flask(__name__)
+CORS(app)                    # <--- 2. Enable CORS on the Flask app
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///quotes.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False

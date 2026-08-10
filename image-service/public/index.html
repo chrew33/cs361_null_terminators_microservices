@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microservices Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <h1>Microservices Dashboard</h1>
+            <p>Live data aggregated from your backend microservices</p>
+            
+            <!-- Interactive Search Bar -->
+            <div class="search-bar-container">
+                <input type="text" id="searchInput" placeholder="Search weather city or item..." />
+                <button id="searchBtn">Search Data</button>
+            </div>
+        </header>
+
+        <div class="grid">
+            <!-- Favorites Widget -->
+            <div class="card" id="favorites-card">
+                <div class="card-header">
+                    <h2>Saved Favorites</h2>
+                    <span class="badge">Port 6070</span>
+                </div>
+                <div id="favorites-content" class="card-body">Loading favorites...</div>
+            </div>
+
+            <!-- Weather Widget -->
+            <div class="card" id="weather-card">
+                <div class="card-header">
+                    <h2>Weather Forecast</h2>
+                    <span class="badge">Port 3333</span>
+                </div>
+                <div id="weather-content" class="card-body">Loading weather...</div>
+            </div>
+
+            <!-- Quote Widget -->
+            <div class="card" id="quote-card">
+                <div class="card-header">
+                    <h2>Daily Quote</h2>
+                    <span class="badge">Port 5010</span>
+                </div>
+                <div id="quote-content" class="card-body">Loading quote...</div>
+            </div>
+            <!-- Book Search Widget -->
+            <div class="card" id="book-card">
+                <div class="card-header">
+                    <h2>Book Lookup</h2>
+                    <span class="badge">Open Library API</span>
+                </div>
+                <div id="book-content" class="card-body">
+                    <p style="color: var(--text-muted);">Type an ISBN in the search bar above to look up a book.</p>
+                </div>
+            </div>
+            <!-- Image Widget -->
+            <div class="card" id="image-card">
+                <div class="card-header">
+                    <h2>Visual Asset</h2>
+                    <span class="badge">Port 5001</span>
+                </div>
+                <div id="image-content" class="card-body">Loading image...</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
