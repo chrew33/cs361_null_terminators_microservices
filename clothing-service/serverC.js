@@ -3,59 +3,29 @@ const app = express();
 const PORT = 4000;
 
 function clothingRec(current_temp, precipitation_probability) {
+    let clothes;
     if (current_temp < 30) {
-        return ['Winter Coat', 'Warm Layers']
-        
+        return ['Winter Coat', 'Warm Layers'];
+
     } else if (current_temp < 40) {
-        if (precipitation_probability < 50) {
-            return ['Heavy Jacket', 'Layers']
-        }
-        else if (precipitation_probability < 60) {
-            return ['Heavy Jacket', 'Layers', 'Rain Jacket'];
-        } else {   
-            return ['Heavy Jacket', 'Layers', 'Umbrella']
-        }
-
+        clothes = ['Heavy Jacket', 'Layers'];
     } else if (current_temp < 55) {
-        if (precipitation_probability < 50) {
-            return ['Jacket/Hoodie', 'Pants']
-        }
-        else if (precipitation_probability < 60) {
-            return ['Jacket/Hoodie', 'Pants', 'Rain Jacket']
-        } else {   
-            return ['Jacket/Hoodie', 'Pants', 'Umbrella']
-        }
-
+        clothes = ['Jacket/Hoodie', 'Pants'];
     } else if (current_temp < 70) {
-        if (precipitation_probability < 50) {
-            return ['Long Sleeves', 'Pants']
-        }
-        else if (precipitation_probability < 60) {
-            return ['Long Sleeves', 'Pants', 'Rain Jacket']
-        } else {   
-            return ['Long Sleeves', 'Pants', 'Umbrella']
-        }
-
+        clothes = ['Long Sleeves', 'Pants'];
     } else if (current_temp < 85) {
-        if (precipitation_probability < 50) {
-            return ['T-Shirt', 'Shorts/Light Pants']
-        }
-        else if (precipitation_probability < 60) {
-            return ['T-Shirt', 'Shorts/Light Pants', 'Rain Jacket']
-        } else {   
-            return ['T-Shirt', 'Shorts/Light Pants', 'Umbrella']
-        }
-    
+        clothes = ['T-Shirt', 'Shorts/Light Pants'];
     } else {
-        if (precipitation_probability < 50) {
-            return ['T-Shirt', 'Shorts']
-        }
-        else if (precipitation_probability < 60) {
-            return ['T-Shirt', 'Shorts', 'Rain Jacket']
-        } else {   
-            return ['T-Shirt', 'Shorts', 'Umbrella']
-        }
+        clothes = ['T-Shirt', 'Shorts'];
     }
+
+    if (precipitation_probability > 60) {
+        clothes.push('Umbrella');
+    } else if (precipitation_probability > 50) {
+        clothes.push('Rain Jacket');
+    }
+
+    return clothes;
 }
 
 
