@@ -17,7 +17,7 @@ const dataToSend = {
 
 Here I use fetch() to send the data through a POST request:
 ```
-response = await fetch("http://localhost:5050/api/math", {
+const response = await fetch("http://localhost:5050/api/math", {
     method: "Post",
     headers:{
         "Content-Type": "application/json"
